@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Seoul serves authentic Korean cuisine in Tbilisi since 2017 — bulgogi, bibimbap, kimchi stew and more. 7 Budapesti St, open daily until 22:30.">
 <title>Seoul Tbilisi</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'></text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap">
@@ -71,9 +72,15 @@
   @media(min-width:768px){.burger{display:none;}}
 
   #top{position:relative;min-height:92svh;overflow:hidden;background:var(--ink);isolation:isolate;}
-  #top img.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6;}
-  #top .overlay{position:absolute;inset:0;background:linear-gradient(to top, var(--ink) 0%, rgba(26,21,18,.7) 45%, rgba(26,21,18,.4) 100%);}
-  .hero-content{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:92svh;max-width:1152px;margin:0 auto;padding:60px 20px 64px;}
+  .hero-bg{
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+  }
+  #top .overlay{position:absolute;inset:0;background:rgba(26,21,18,0.75);}
+  .hero-content{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;min-height:92svh;max-width:1152px;margin:0 auto;padding:60px 20px 64px;}
   @media(min-width:640px){.hero-content{padding-bottom:96px;}}
   @media(min-width:1024px){.hero-content{padding-left:32px;padding-right:32px;}}
   .hero-content .eyebrow{color:var(--gold);}
@@ -240,7 +247,7 @@
 
 <main>
 <section id="top">
-  <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1580651315530-69c8e19a2a06?w=1920&q=80');"></div>
+  <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1553163147-622ab57be1c7?w=1920&q=80');"></div>
   <div class="overlay"></div>
   <div class="hero-content">
     <p class="eyebrow">Since 2017 · Tbilisi, Georgia</p>
