@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Seoul serves authentic Korean cuisine in Tbilisi since 2017 — bulgogi, bibimbap, kimchi stew and more. 7 Budapesti St, open daily until 22:30.">
+<title>Seoul — Authentic Korean Restaurant in Tbilisi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Restaurant","name":"Seoul","servesCuisine":"Korean","priceRange":"30–70 GEL","telephone":"+995551780000","address":{"@type":"PostalAddress","streetAddress":"7 Budapesti St","addressLocality":"Tbilisi","postalCode":"0160","addressCountry":"GE"},"openingHours":"Mo-Su 11:00-22:30","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.5","reviewCount":"1000"}}
+</script>
+<style>
+  :root{
+    --ink:#1a1512;
+    --ink-foreground:#f7f2e6;
+    --ink-muted:#c9c0b2;
+    --primary:#bd2727;
+    --primary-foreground:#ffffff;
+    --gold:#d3a34d;
+    --gold-foreground:#1a1512;
+    --cream:#f6f0e3;
+    --background:#faf8f3;
+    --foreground:#211c17;
+    --muted-foreground:#6d675e;
+    --border:#e6dfd1;
+    --card:#ffffff;
+    --radius:4px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Manrope',sans-serif;
+    color:var(--foreground);
+    background:var(--background);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  .font-display{font-family:'Archivo',sans-serif;font-weight:800;}
+  .eyebrow{font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;}
+  .container{max-width:1152px;margin:0 auto;padding:0 20px;}
+  @media(min-width:1024px){.container{padding:0 32px;}}
+
+  /* Header */
+  header{position:fixed;inset-inline:0;top:0;z-index:50;transition:background-color .3s;}
+  header.scrolled{background:var(--ink);}
+  nav.navbar{display:flex;align-items:center;justify-content:space-between;height:72px;max-width:1152px;margin:0 auto;padding:0 20px;}
+  @media(min-width:1024px){nav.navbar{padding:0 32px;height:88px;}}
+  .logo{font-family:'Archivo',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:.28em;color:var(--ink-foreground);}
+  .nav-links{display:none;align-items:center;gap:32px;}
+  @media(min-width:768px){.nav-links{display:flex;}}
+  .nav-links a{font-size:.875rem;font-weight:500;color:rgba(247,242,230,.8);transition:color .2s;}
+  .nav-links a:hover{color:var(--gold);}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+    cursor:pointer;border:none;transition:background-color .2s,opacity .2s;
+    border-radius:var(--radius);
+  }
+  .btn-primary{background:var(--primary);color:var(--primary-foreground);}
+  .btn-primary:hover{opacity:.9;}
+  .btn-gold{background:var(--gold);color:var(--gold-foreground);}
+  .btn-gold:hover{opacity:.9;}
+  .btn-outline{background:transparent;color:var(--ink-foreground);border:1px solid rgba(247,242,230,.35);}
+  .btn-outline:hover{background:rgba(247,242,230,.1);}
+  .btn-sm{height:32px;padding:0 14px;font-size:.75rem;}
+  .btn-lg{height:52px;padding:0 36px;font-size:.875rem;}
+  .btn-md{height:40px;padding:0 32px;font-size:.875rem;}
+  .burger{display:flex;background:none;border:none;color:var(--ink-foreground);cursor:pointer;}
+  @media(min-width:768px){.burger{display:none;}}
+
+  /* Hero */
+  #top{position:relative;min-height:92svh;overflow:hidden;background:var(--ink);isolation:isolate;}
+  #top img.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6;}
+  #top .overlay{position:absolute;inset:0;background:linear-gradient(to top, var(--ink) 0%, rgba(26,21,18,.7) 45%, rgba(26,21,18,.4) 100%);}
+  .hero-content{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:92svh;max-width:1152px;margin:0 auto;padding:128px 20px 64px;}
+  @media(min-width:640px){.hero-content{padding-bottom:96px;}}
+  @media(min-width:1024px){.hero-content{padding-left:32px;padding-right:32px;}}
+  .hero-content .eyebrow{color:var(--gold);}
+  .hero-content h1{margin-top:20px;font-size:clamp(3.75rem,17vw,12rem);font-weight:800;line-height:.85;letter-spacing:.02em;color:var(--ink-foreground);}
+  .hero-tagline{margin-top:24px;max-width:640px;font-family:'Archivo',sans-serif;font-weight:700;font-size:1.5rem;line-height:1.2;color:var(--ink-foreground);}
+  @media(min-width:640px){.hero-tagline{font-size:2.25rem;}}
+  .hero-sub{margin-top:16px;max-width:520px;color:var(--ink-muted);font-size:1rem;}
+  @media(min-width:640px){.hero-sub{font-size:1.125rem;}}
+  .hero-actions{margin-top:36px;display:flex;flex-direction:column;gap:12px;}
+  @media(min-width:640px){.hero-actions{flex-direction:row;}}
+
+  section{padding:80px 0;}
+  @media(min-width:640px){section{padding:112px 0;}}
+  h2{font-size:2.25rem;line-height:1.05;}
+  @media(min-width:640px){h2{font-size:3rem;}}
+
+  /* About */
+  #about{background:var(--background);}
+  .about-grid{display:grid;gap:48px;align-items:center;}
+  @media(min-width:1024px){.about-grid{grid-template-columns:1fr 1fr;gap:80px;}}
+  #about .eyebrow{color:var(--primary);}
+  #about p.lead{margin-top:24px;font-size:1.125rem;line-height:1.7;color:var(--muted-foreground);}
+  #about h3{margin-top:40px;font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;}
+  .pill-list{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;}
+  .pill{border:1px solid var(--border);background:var(--cream);border-radius:999px;padding:8px 16px;font-size:.875rem;font-weight:500;}
+  .rating-badge{margin-top:40px;display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:var(--ink-foreground);border-radius:var(--radius);padding:16px 20px;font-size:.875rem;font-weight:500;}
+  .rating-badge svg{fill:var(--gold);color:var(--gold);}
+  .about-image-wrap{position:relative;}
+  .about-image-wrap img{aspect-ratio:4/5;width:100%;object-fit:cover;border-radius:var(--radius);}
+  .about-badge{position:absolute;bottom:-24px;left:-16px;background:var(--primary);color:#fff;padding:20px 24px;display:none;}
+  @media(min-width:640px){.about-badge{display:block;}}
+  .about-badge .year{font-family:'Archivo',sans-serif;font-weight:800;font-size:1.875rem;line-height:1;}
+  .about-badge .label{margin-top:4px;font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;}
+
+  /* Menu */
+  #menu{background:var(--ink);color:var(--ink-foreground);}
+  #menu .eyebrow{color:var(--gold);}
+  #menu .lead{margin-top:20px;color:var(--ink-muted);max-width:560px;}
+  .menu-grid{margin-top:56px;display:grid;gap:32px;grid-template-columns:1fr;}
+  @media(min-width:640px){.menu-grid{grid-template-columns:1fr 1fr;}}
+  @media(min-width:1024px){.menu-grid{grid-template-columns:repeat(4,1fr);}}
+  .menu-item img{aspect-ratio:1/1;width:100%;object-fit:cover;border-radius:var(--radius);}
+  .menu-item .eyebrow{margin-top:16px;color:var(--gold);}
+  .menu-item h3{margin-top:8px;font-size:1.25rem;font-family:'Archivo',sans-serif;font-weight:800;}
+  .menu-item p{margin-top:8px;font-size:.875rem;line-height:1.6;color:var(--ink-muted);}
+  .menu-footer{margin-top:56px;display:flex;flex-direction:column;gap:24px;justify-content:space-between;border-top:1px solid rgba(247,242,230,.15);padding-top:32px;}
+  @media(min-width:640px){.menu-footer{flex-direction:row;align-items:center;}}
+  .menu-footer p{font-size:.875rem;color:var(--ink-muted);}
+
+  /* Why us */
+  #why-us{background:var(--cream);}
+  #why-us .eyebrow{color:var(--primary);}
+  #why-us .lead{margin-top:20px;color:var(--muted-foreground);max-width:560px;}
+  .features-grid{margin-top:56px;display:grid;gap:24px;grid-template-columns:1fr;}
+  @media(min-width:640px){.features-grid{grid-template-columns:1fr 1fr;}}
+  @media(min-width:1024px){.features-grid{grid-template-columns:repeat(5,1fr);}}
+  .feature-card{height:100%;border:1px solid var(--border);background:var(--card);border-radius:var(--radius);padding:24px;}
+  .feature-card svg{color:var(--primary);}
+  .feature-card h3{margin-top:20px;font-size:1.125rem;font-family:'Archivo',sans-serif;font-weight:800;}
+  .feature-card p{margin-top:8px;font-size:.875rem;line-height:1.6;color:var(--muted-foreground);}
+
+  /* Reviews */
+  #reviews{background:var(--ink);color:var(--ink-foreground);}
+  .reviews-head{display:flex;flex-direction:column;gap:32px;justify-content:space-between;}
+  @media(min-width:640px){.reviews-head{flex-direction:row;align-items:flex-end;}}
+  #reviews .eyebrow{color:var(--gold);}
+  .rating-box{border:1px solid rgba(247,242,230,.2);border-radius:var(--radius);padding:16px 24px;}
+  .rating-box .score{font-family:'Archivo',sans-serif;font-weight:800;font-size:2.25rem;color:var(--gold);line-height:1;}
+  .rating-box .count{margin-top:8px;font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-muted);}
+  .reviews-grid{margin-top:56px;display:grid;gap:24px;grid-template-columns:1fr;}
+  @media(min-width:768px){.reviews-grid{grid-template-columns:repeat(3,1fr);}}
+  .review-card{display:flex;flex-direction:column;height:100%;border:1px solid rgba(247,242,230,.15);border-radius:var(--radius);padding:28px;}
+  .stars{display:flex;gap:4px;}
+  .stars svg{width:16px;height:16px;fill:var(--gold);color:var(--gold);}
+  .stars svg.empty{fill:none;color:rgba(201,192,178,.4);}
+  .review-card blockquote{margin-top:20px;flex:1;font-size:1.125rem;line-height:1.6;}
+  .review-card figcaption{margin-top:24px;font-size:.875rem;color:var(--ink-muted);}
+
+  /* Location */
+  #location{background:var(--background);}
+  #location .eyebrow{color:var(--primary);}
+  .location-grid{margin-top:48px;display:grid;gap:40px;}
+  @media(min-width:1024px){.location-grid{grid-template-columns:1fr 1fr;}}
+  .map-frame{overflow:hidden;border-radius:var(--radius);border:1px solid var(--border);}
+  .map-frame iframe{width:100%;height:320px;border:0;}
+  @media(min-width:640px){.map-frame iframe{height:416px;}}
+  .info-row{display:flex;align-items:flex-start;gap:12px;}
+  .info-row svg{color:var(--primary);flex-shrink:0;margin-top:4px;}
+  .info-row p{font-size:1.125rem;line-height:1.6;}
+  .hours-row{margin-top:32px;display:flex;align-items:center;gap:12px;}
+  .hours-row svg{color:var(--primary);}
+  .hours-row p{font-size:.875rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;}
+  table.hours{margin-top:20px;width:100%;font-size:.875rem;border-collapse:collapse;}
+  table.hours tr{border-bottom:1px solid var(--border);}
+  table.hours tr:last-child{border-bottom:none;}
+  table.hours th{padding:12px 0;text-align:left;font-weight:500;}
+  table.hours td{padding:12px 0;text-align:right;color:var(--muted-foreground);}
+
+  /* Contact */
+  #contact{background:var(--cream);}
+  .contact-grid{display:grid;gap:56px;}
+  @media(min-width:1024px){.contact-grid{grid-template-columns:1fr 1.1fr;gap:80px;}}
+  #contact .eyebrow{color:var(--primary);}
+  #contact .lead{margin-top:20px;color:var(--muted-foreground);}
+  .phone-link{margin-top:32px;display:inline-flex;align-items:center;gap:12px;font-size:1.25rem;font-weight:700;transition:color .2s;}
+  .phone-link:hover{color:var(--primary);}
+  .phone-link svg{color:var(--primary);}
+  .social-row{margin-top:32px;display:flex;gap:12px;}
+  .social-btn{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--border);background:var(--card);border-radius:var(--radius);transition:background-color .2s,color .2s;}
+  .social-btn:hover{background:var(--primary);color:#fff;}
+  form.reserve-form{display:grid;gap:20px;border:1px solid var(--border);background:var(--card);border-radius:var(--radius);padding:24px;}
+  @media(min-width:640px){form.reserve-form{grid-template-columns:1fr 1fr;padding:32px;}}
+  .field{display:grid;gap:8px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-size:.875rem;font-weight:500;}
+  .field input,.field textarea{
+    height:36px;width:100%;border-radius:6px;border:1px solid var(--border);
+    background:transparent;padding:4px 12px;font-size:.875rem;font-family:inherit;
+  }
+  .field textarea{height:auto;min-height:70px;padding:8px 12px;resize:vertical;}
+  form.reserve-form button{grid-column:1/-1;}
+
+  /* Footer */
+  footer{background:var(--ink);color:var(--ink-foreground);padding:56px 0;}
+  .footer-top{display:flex;flex-direction:column;gap:32px;border-bottom:1px solid rgba(247,242,230,.15);padding-bottom:32px;}
+  @media(min-width:640px){.footer-top{flex-direction:row;align-items:center;justify-content:space-between;}}
+  .footer-links{display:flex;flex-wrap:wrap;gap:24px;}
+  .footer-links a{font-size:.875rem;color:var(--ink-muted);transition:color .2s;}
+  .footer-links a:hover{color:var(--gold);}
+  .footer-social{display:flex;gap:12px;}
+  .footer-social a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid rgba(247,242,230,.2);border-radius:var(--radius);transition:border-color .2s,color .2s;}
+  .footer-social a:hover{border-color:var(--gold);color:var(--gold);}
+  footer .copyright{margin-top:32px;font-size:.75rem;color:var(--ink-muted);}
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <nav class="navbar">
+    <a href="#top" class="logo">SEOUL</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#why-us">Why Us</a>
+      <a href="#location">Location</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-primary btn-sm">Reserve</a>
+    </div>
+    <button class="burger" aria-label="Open menu" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main>
+  <section id="top">
+    <img class="hero-img" src="assets/hero-0jHHhHSb.jpg" alt="Korean table set with sizzling bulgogi, kimchi and banchan at Seoul restaurant">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <p class="eyebrow">Since 2017 · Tbilisi, Georgia</p>
+      <h1 class="font-display">SEOUL</h1>
+      <p class="hero-tagline">Authentic Korean Dining in the Heart of Tbilisi</p>
+      <p class="hero-sub">Serving traditional Korean cuisine since 2017.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-primary btn-lg">View Menu</a>
+        <a href="#contact" class="btn btn-outline btn-lg">Reserve a Table</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container about-grid">
+      <div>
+        <p class="eyebrow">Our Story</p>
+        <h2 class="font-display">A taste of Korea,<br>served in Vake-Saburtalo</h2>
+        <p class="lead">Seoul Restaurant is an authentic Korean restaurant in Tbilisi, serving traditional Korean cuisine made with fresh ingredients and time-honored recipes.</p>
+        <h3>Signature dishes</h3>
+        <ul class="pill-list">
+          <li class="pill">Bulgogi</li>
+          <li class="pill">Bibimbap</li>
+          <li class="pill">Kimchi Stew</li>
+          <li class="pill">Seolleongtang</li>
+          <li class="pill">Japchae</li>
+          <li class="pill">Korean Fried Chicken</li>
+        </ul>
+        <div class="rating-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+          <span><strong>4.5★</strong> rating from 1,000+ reviews on Google</span>
+        </div>
+      </div>
+      <div class="about-image-wrap">
+        <img src="assets/interior-real.jpg" alt="Dining room of Seoul restaurant with wooden tables and backlit Korean lattice screens">
+        <div class="about-badge">
+          <p class="year font-display">2017</p>
+          <p class="label">Open since</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="container">
+      <p class="eyebrow">Menu Highlights</p>
+      <h2 class="font-display">Dishes our guests come back for</h2>
+      <p class="lead">Rolls, rice dishes, noodles and stews — cooked the way they are in Korea.</p>
+
+      <div class="menu-grid">
+        <div class="menu-item">
+          <img src="assets/bulgogi.jpg" alt="Bulgogi">
+          <p class="eyebrow">Rice dishes</p>
+          <h3>Bulgogi</h3>
+          <p>Marinated beef grilled with onion, sesame and scallions.</p>
+        </div>
+        <div class="menu-item">
+          <img src="assets/bibimbap.jpg" alt="Bibimbap">
+          <p class="eyebrow">Rice dishes</p>
+          <h3>Bibimbap</h3>
+          <p>Rice bowl with seasoned vegetables, beef and a runny egg.</p>
+        </div>
+        <div class="menu-item">
+          <img src="assets/kimchi-stew.jpg" alt="Kimchi Jjigae">
+          <p class="eyebrow">Stews &amp; Soups</p>
+          <h3>Kimchi Jjigae</h3>
+          <p>Aged kimchi simmered with pork and tofu in a bubbling pot.</p>
+        </div>
+        <div class="menu-item">
+          <img src="assets/seolleongtang.jpg" alt="Seolleongtang">
+          <p class="eyebrow">Stews &amp; Soups</p>
+          <h3>Seolleongtang</h3>
+          <p>Milky ox bone broth slow-simmered for hours with scallions.</p>
+        </div>
+        <div class="menu-item">
+          <img src="assets/japchae.jpg" alt="Japchae">
+          <p class="eyebrow">Noodles</p>
+          <h3>Japchae</h3>
+          <p>Sweet potato glass noodles stir-fried with crisp vegetables.</p>
+        </div>
+        <div class="menu-item">
+          <img src="assets/naengmyeon.jpg" alt="Mul Naengmyeon">
+          <p class="eyebrow">Noodles</p>
+          <h3>Mul Naengmyeon</h3>
+          <p>Chilled buckwheat noodles in icy broth with pear and egg.</p>
+        </div>
+        <div class="menu-item">
+          <img src="assets/kimbap.jpg" alt="Kimbap">
+          <p class="eyebrow">Rolls</p>
+          <h3>Kimbap</h3>
+          <p>Seaweed rice rolls filled with vegetables, egg and ham.</p>
+        </div>
+        <div class="menu-item">
+          <img src="assets/fried-chicken.jpg" alt="Korean Fried Chicken">
+          <p class="eyebrow">Rolls</p>
+          <h3>Korean Fried Chicken</h3>
+          <p>Double-fried chicken glazed in sweet-spicy gochujang.</p>
+        </div>
+      </div>
+
+      <div class="menu-footer">
+        <p>Average meal: 30–70 GEL per person</p>
+        <a href="tel:+995551780000" class="btn btn-gold btn-md">Full menu available on request</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="why-us">
+    <div class="container">
+      <p class="eyebrow">Why Seoul</p>
+      <h2 class="font-display">Authentic recipes, fresh ingredients</h2>
+      <p class="lead">Every dish is prepared to order with produce sourced fresh each morning — no shortcuts, no fusion, just Korean cooking as it should taste.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+          <h3>Vegetarian options</h3>
+          <p>Meat-free bibimbap, japchae and banchan.</p>
+        </div>
+        <div class="feature-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/></svg>
+          <h3>Free Wi-Fi</h3>
+          <p>Fast connection for every table.</p>
+        </div>
+        <div class="feature-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2-5 5-5-5"/><rect width="20" height="15" x="2" y="7" rx="2"/></svg>
+          <h3>Sports broadcasts</h3>
+          <p>Catch the game on our screens.</p>
+        </div>
+        <div class="feature-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 10a4 4 0 0 1-8 0"/><path d="M3.103 6.034h17.794"/><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/></svg>
+          <h3>Takeout</h3>
+          <p>Order ahead and pick up hot.</p>
+        </div>
+        <div class="feature-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg>
+          <h3>Delivery</h3>
+          <p>Korean comfort food to your door.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="container">
+      <div class="reviews-head">
+        <div>
+          <p class="eyebrow">Guest Reviews</p>
+          <h2 class="font-display">Loved across Tbilisi</h2>
+        </div>
+        <div class="rating-box">
+          <p class="score">4.5/5</p>
+          <p class="count">1,000+ Google reviews</p>
+        </div>
+      </div>
+
+      <div class="reviews-grid">
+        <figure class="review-card">
+          <div class="stars">
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+          </div>
+          <blockquote>"The best Korean restaurant I've tried in Tbilisi — the flavors are genuinely authentic."</blockquote>
+          <figcaption>Google review · 5★</figcaption>
+        </figure>
+
+        <figure class="review-card">
+          <div class="stars">
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+          </div>
+          <blockquote>"Absolutely the best Korean food I've ever had. This is my ultimate favorite restaurant."</blockquote>
+          <figcaption>Google review · 5★</figcaption>
+        </figure>
+
+        <figure class="review-card">
+          <div class="stars">
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            <svg class="empty" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+          </div>
+          <blockquote>"I've found my happy place for Korean nights — and the decor is spot on."</blockquote>
+          <figcaption>Google review · 4★</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="location">
+    <div class="container">
+      <p class="eyebrow">Find Us</p>
+      <h2 class="font-display">Location &amp; hours</h2>
+
+      <div class="location-grid">
+        <div class="map-frame">
+          <iframe title="Map showing Seoul restaurant at 7 Budapesti St, Tbilisi"
+            src="https://www.google.com/maps?q=Seoul%20Restaurant%2C%207%20Budapesti%20St%2C%20Vake-Saburtalo%2C%20Tbilisi%200160%2C%20Georgia&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div>
+          <div class="info-row">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+            <p>7 Budapesti St, Vake-Saburtalo, Tbilisi 0160, Georgia</p>
+          </div>
+          <div class="hours-row">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <p>Open daily · closes 22:30</p>
+          </div>
+          <table class="hours">
+            <tr><th>Monday</th><td>11:00 – 22:30</td></tr>
+            <tr><th>Tuesday</th><td>11:00 – 22:30</td></tr>
+            <tr><th>Wednesday</th><td>11:00 – 22:30</td></tr>
+            <tr><th>Thursday</th><td>11:00 – 22:30</td></tr>
+            <tr><th>Friday</th><td>11:00 – 22:30</td></tr>
+            <tr><th>Saturday</th><td>11:00 – 22:30</td></tr>
+            <tr><th>Sunday</th><td>11:00 – 22:30</td></tr>
+          </table>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Seoul%20Restaurant%2C%207%20Budapesti%20St%2C%20Vake-Saburtalo%2C%20Tbilisi%200160%2C%20Georgia" target="_blank" rel="noreferrer" class="btn btn-primary btn-md" style="margin-top:32px;">Get Directions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container contact-grid">
+      <div>
+        <p class="eyebrow">Reservations</p>
+        <h2 class="font-display">Book your table</h2>
+        <p class="lead">Send us your details and we'll confirm by phone. For same-day bookings, calling is fastest.</p>
+        <a href="tel:+995551780000" class="phone-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+          +995 551 78 00 00
+        </a>
+        <div class="social-row">
+          <a href="https://instagram.com/seoul.ge" target="_blank" rel="noreferrer" aria-label="Seoul on Instagram" class="social-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+          <a href="https://facebook.com/seoul.ge" target="_blank" rel="noreferrer" aria-label="Seoul on Facebook" class="social-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <form class="reserve-form" onsubmit="return handleReserveSubmit(event)">
+          <div class="field"><label for="name">Name</label><input id="name" name="name" required placeholder="Your name"></div>
+          <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required placeholder="+995 ..."></div>
+          <div class="field"><label for="date">Date</label><input id="date" name="date" type="date" required></div>
+          <div class="field"><label for="time">Time</label><input id="time" name="time" type="time" required></div>
+          <div class="field full"><label for="guests">Number of guests</label><input id="guests" name="guests" type="number" min="1" max="30" value="2"></div>
+          <div class="field full"><label for="message">Message</label><textarea id="message" name="message" rows="4" placeholder="Allergies, occasion, seating preference…"></textarea></div>
+          <button type="submit" class="btn btn-primary btn-lg">Request Reservation</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <a href="#top" class="logo">SEOUL</a>
+      <nav class="footer-links">
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#location">Location</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="footer-social">
+        <a href="https://instagram.com/seoul.ge" target="_blank" rel="noreferrer" aria-label="Seoul on Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+        </a>
+        <a href="https://facebook.com/seoul.ge" target="_blank" rel="noreferrer" aria-label="Seoul on Facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Seoul Restaurant Tbilisi. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // затемнение шапки при скролле
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // простая обработка формы бронирования (без бэкенда) —
+  // при желании подключите Formspree, Getform или свой API
+  function handleReserveSubmit(e){
+    e.preventDefault();
+    alert('Спасибо! Ваша заявка на бронирование отправлена. Мы свяжемся с вами по телефону.');
+    e.target.reset();
+    return false;
+  }
+</script>
+</body>
+</html>
