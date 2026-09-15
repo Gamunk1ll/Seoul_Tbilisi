@@ -211,6 +211,84 @@
   .footer-social a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid rgba(247,242,230,.2);border-radius:var(--radius);transition:border-color .2s,color .2s;}
   .footer-social a:hover{border-color:var(--gold);color:var(--gold);}
   footer .copyright{margin-top:32px;font-size:.75rem;color:var(--ink-muted);}
+
+  /* ===== Анимации ===== */
+
+  /* Появление элементов при скролле */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+    transition-delay:var(--reveal-delay, 0ms);
+  }
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+  }
+
+  /* Hero: буквы и текст выезжают при загрузке */
+  #top .eyebrow{opacity:0;animation:fadeUp .8s .1s cubic-bezier(.22,1,.36,1) forwards;}
+  #top h1{opacity:0;animation:fadeUp 1s .25s cubic-bezier(.22,1,.36,1) forwards;}
+  #top .hero-tagline{opacity:0;animation:fadeUp 1s .45s cubic-bezier(.22,1,.36,1) forwards;}
+  #top .hero-sub{opacity:0;animation:fadeUp 1s .6s cubic-bezier(.22,1,.36,1) forwards;}
+  #top .hero-actions{opacity:0;animation:fadeUp 1s .75s cubic-bezier(.22,1,.36,1) forwards;}
+  #top .hero-img{animation:heroZoom 12s ease-out forwards;}
+
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(24px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  @keyframes heroZoom{
+    from{transform:scale(1.08);}
+    to{transform:scale(1);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    #top .eyebrow,#top h1,#top .hero-tagline,#top .hero-sub,#top .hero-actions{animation:none;opacity:1;}
+    #top .hero-img{animation:none;}
+  }
+
+  /* Кнопки: плавный "приподнимающийся" hover вместо резкой смены opacity */
+  .btn{transition:background-color .25s, opacity .25s, transform .25s, box-shadow .25s;}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.18);}
+  .btn:active{transform:translateY(0);box-shadow:none;}
+
+  /* Карточки: лёгкий подъём + тень при наведении */
+  .feature-card,.review-card,.menu-item img,.about-image-wrap img,.pill,.social-btn,.footer-social a{
+    transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s, background-color .25s, border-color .25s, color .25s;
+  }
+  .feature-card:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(0,0,0,.08);}
+  .review-card:hover{transform:translateY(-6px);border-color:rgba(211,163,77,.5);}
+  .menu-item{overflow:hidden;}
+  .menu-item img{transition:transform .5s cubic-bezier(.22,1,.36,1);}
+  .menu-item:hover img{transform:scale(1.06);}
+  .about-image-wrap{overflow:hidden;border-radius:var(--radius);}
+  .about-image-wrap img{transition:transform .6s cubic-bezier(.22,1,.36,1);}
+  .about-image-wrap:hover img{transform:scale(1.05);}
+  .pill:hover{background:var(--gold);border-color:var(--gold);color:var(--gold-foreground);transform:translateY(-2px);}
+  .social-btn:hover,.footer-social a:hover{transform:translateY(-3px);}
+
+  /* Иконки features: лёгкое покачивание при наведении на карточку */
+  .feature-card svg{transition:transform .35s cubic-bezier(.22,1,.36,1);}
+  .feature-card:hover svg{transform:rotate(-8deg) scale(1.1);}
+
+  /* Логотип и ссылки навигации */
+  .logo{transition:letter-spacing .3s, color .3s;}
+  .nav-links a{position:relative;}
+  .nav-links a:not(.btn)::after{
+    content:'';position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--gold);
+    transition:width .3s cubic-bezier(.22,1,.36,1);
+  }
+  .nav-links a:not(.btn):hover::after{width:100%;}
+
+  /* Значок рейтинга: мягкая пульсация звезды */
+  .rating-badge svg{animation:starPulse 2.4s ease-in-out infinite;}
+  @keyframes starPulse{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.15);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .rating-badge svg{animation:none;}
+  }
 </style>
 </head>
 <body>
@@ -250,7 +328,7 @@
 
   <section id="about">
     <div class="container about-grid">
-      <div>
+      <div class="reveal">
         <p class="eyebrow">Our Story</p>
         <h2 class="font-display">A taste of Korea,<br>served in Vake-Saburtalo</h2>
         <p class="lead">Seoul Restaurant is an authentic Korean restaurant in Tbilisi, serving traditional Korean cuisine made with fresh ingredients and time-honored recipes.</p>
@@ -268,7 +346,7 @@
           <span><strong>4.5★</strong> rating from 1,000+ reviews on Google</span>
         </div>
       </div>
-      <div class="about-image-wrap">
+      <div class="about-image-wrap reveal" style="--reveal-delay:150ms">
         <img src="assets/interior-real.jpg" alt="Dining room of Seoul restaurant with wooden tables and backlit Korean lattice screens">
         <div class="about-badge">
           <p class="year font-display">2017</p>
@@ -280,54 +358,56 @@
 
   <section id="menu">
     <div class="container">
-      <p class="eyebrow">Menu Highlights</p>
-      <h2 class="font-display">Dishes our guests come back for</h2>
-      <p class="lead">Rolls, rice dishes, noodles and stews — cooked the way they are in Korea.</p>
+      <div class="reveal">
+        <p class="eyebrow">Menu Highlights</p>
+        <h2 class="font-display">Dishes our guests come back for</h2>
+        <p class="lead">Rolls, rice dishes, noodles and stews — cooked the way they are in Korea.</p>
+      </div>
 
       <div class="menu-grid">
-        <div class="menu-item">
+        <div class="menu-item reveal" style="--reveal-delay:0ms">
           <img src="assets/bulgogi.jpg" alt="Bulgogi">
           <p class="eyebrow">Rice dishes</p>
           <h3>Bulgogi</h3>
           <p>Marinated beef grilled with onion, sesame and scallions.</p>
         </div>
-        <div class="menu-item">
+        <div class="menu-item reveal" style="--reveal-delay:80ms">
           <img src="assets/bibimbap.jpg" alt="Bibimbap">
           <p class="eyebrow">Rice dishes</p>
           <h3>Bibimbap</h3>
           <p>Rice bowl with seasoned vegetables, beef and a runny egg.</p>
         </div>
-        <div class="menu-item">
+        <div class="menu-item reveal" style="--reveal-delay:160ms">
           <img src="assets/kimchi-stew.jpg" alt="Kimchi Jjigae">
           <p class="eyebrow">Stews &amp; Soups</p>
           <h3>Kimchi Jjigae</h3>
           <p>Aged kimchi simmered with pork and tofu in a bubbling pot.</p>
         </div>
-        <div class="menu-item">
+        <div class="menu-item reveal" style="--reveal-delay:240ms">
           <img src="assets/seolleongtang.jpg" alt="Seolleongtang">
           <p class="eyebrow">Stews &amp; Soups</p>
           <h3>Seolleongtang</h3>
           <p>Milky ox bone broth slow-simmered for hours with scallions.</p>
         </div>
-        <div class="menu-item">
+        <div class="menu-item reveal" style="--reveal-delay:0ms">
           <img src="assets/japchae.jpg" alt="Japchae">
           <p class="eyebrow">Noodles</p>
           <h3>Japchae</h3>
           <p>Sweet potato glass noodles stir-fried with crisp vegetables.</p>
         </div>
-        <div class="menu-item">
+        <div class="menu-item reveal" style="--reveal-delay:80ms">
           <img src="assets/naengmyeon.jpg" alt="Mul Naengmyeon">
           <p class="eyebrow">Noodles</p>
           <h3>Mul Naengmyeon</h3>
           <p>Chilled buckwheat noodles in icy broth with pear and egg.</p>
         </div>
-        <div class="menu-item">
+        <div class="menu-item reveal" style="--reveal-delay:160ms">
           <img src="assets/kimbap.jpg" alt="Kimbap">
           <p class="eyebrow">Rolls</p>
           <h3>Kimbap</h3>
           <p>Seaweed rice rolls filled with vegetables, egg and ham.</p>
         </div>
-        <div class="menu-item">
+        <div class="menu-item reveal" style="--reveal-delay:240ms">
           <img src="assets/fried-chicken.jpg" alt="Korean Fried Chicken">
           <p class="eyebrow">Rolls</p>
           <h3>Korean Fried Chicken</h3>
@@ -335,7 +415,7 @@
         </div>
       </div>
 
-      <div class="menu-footer">
+      <div class="menu-footer reveal">
         <p>Average meal: 30–70 GEL per person</p>
         <a href="tel:+995551780000" class="btn btn-gold btn-md">Full menu available on request</a>
       </div>
@@ -344,32 +424,34 @@
 
   <section id="why-us">
     <div class="container">
-      <p class="eyebrow">Why Seoul</p>
-      <h2 class="font-display">Authentic recipes, fresh ingredients</h2>
-      <p class="lead">Every dish is prepared to order with produce sourced fresh each morning — no shortcuts, no fusion, just Korean cooking as it should taste.</p>
+      <div class="reveal">
+        <p class="eyebrow">Why Seoul</p>
+        <h2 class="font-display">Authentic recipes, fresh ingredients</h2>
+        <p class="lead">Every dish is prepared to order with produce sourced fresh each morning — no shortcuts, no fusion, just Korean cooking as it should taste.</p>
+      </div>
 
       <div class="features-grid">
-        <div class="feature-card">
+        <div class="feature-card reveal" style="--reveal-delay:0ms">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
           <h3>Vegetarian options</h3>
           <p>Meat-free bibimbap, japchae and banchan.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal" style="--reveal-delay:70ms">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/></svg>
           <h3>Free Wi-Fi</h3>
           <p>Fast connection for every table.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal" style="--reveal-delay:140ms">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2-5 5-5-5"/><rect width="20" height="15" x="2" y="7" rx="2"/></svg>
           <h3>Sports broadcasts</h3>
           <p>Catch the game on our screens.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal" style="--reveal-delay:210ms">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 10a4 4 0 0 1-8 0"/><path d="M3.103 6.034h17.794"/><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/></svg>
           <h3>Takeout</h3>
           <p>Order ahead and pick up hot.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal" style="--reveal-delay:280ms">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg>
           <h3>Delivery</h3>
           <p>Korean comfort food to your door.</p>
@@ -380,7 +462,7 @@
 
   <section id="reviews">
     <div class="container">
-      <div class="reviews-head">
+      <div class="reviews-head reveal">
         <div>
           <p class="eyebrow">Guest Reviews</p>
           <h2 class="font-display">Loved across Tbilisi</h2>
@@ -392,7 +474,7 @@
       </div>
 
       <div class="reviews-grid">
-        <figure class="review-card">
+        <figure class="review-card reveal" style="--reveal-delay:0ms">
           <div class="stars">
             <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
             <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
@@ -404,7 +486,7 @@
           <figcaption>Google review · 5★</figcaption>
         </figure>
 
-        <figure class="review-card">
+        <figure class="review-card reveal" style="--reveal-delay:90ms">
           <div class="stars">
             <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
             <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
@@ -416,7 +498,7 @@
           <figcaption>Google review · 5★</figcaption>
         </figure>
 
-        <figure class="review-card">
+        <figure class="review-card reveal" style="--reveal-delay:180ms">
           <div class="stars">
             <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
             <svg viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
@@ -433,16 +515,18 @@
 
   <section id="location">
     <div class="container">
-      <p class="eyebrow">Find Us</p>
-      <h2 class="font-display">Location &amp; hours</h2>
+      <div class="reveal">
+        <p class="eyebrow">Find Us</p>
+        <h2 class="font-display">Location &amp; hours</h2>
+      </div>
 
       <div class="location-grid">
-        <div class="map-frame">
+        <div class="map-frame reveal">
           <iframe title="Map showing Seoul restaurant at 7 Budapesti St, Tbilisi"
             src="https://www.google.com/maps?q=Seoul%20Restaurant%2C%207%20Budapesti%20St%2C%20Vake-Saburtalo%2C%20Tbilisi%200160%2C%20Georgia&output=embed"
             loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-        <div>
+        <div class="reveal" style="--reveal-delay:120ms">
           <div class="info-row">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
             <p>7 Budapesti St, Vake-Saburtalo, Tbilisi 0160, Georgia</p>
@@ -468,7 +552,7 @@
 
   <section id="contact">
     <div class="container contact-grid">
-      <div>
+      <div class="reveal">
         <p class="eyebrow">Reservations</p>
         <h2 class="font-display">Book your table</h2>
         <p class="lead">Send us your details and we'll confirm by phone. For same-day bookings, calling is fastest.</p>
@@ -485,7 +569,7 @@
           </a>
         </div>
       </div>
-      <div>
+      <div class="reveal" style="--reveal-delay:120ms">
         <form class="reserve-form" onsubmit="return handleReserveSubmit(event)">
           <div class="field"><label for="name">Name</label><input id="name" name="name" required placeholder="Your name"></div>
           <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required placeholder="+995 ..."></div>
@@ -524,11 +608,25 @@
 </footer>
 
 <script>
-  // затемнение шапки при скролле
   const header = document.getElementById('site-header');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 40);
   });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
 
   // простая обработка формы бронирования (без бэкенда) —
   // при желании подключите Formspree, Getform или свой API
